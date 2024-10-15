@@ -1,5 +1,8 @@
 package com.example.coffee.exception;
 
+import lombok.Getter;
+
+@Getter
 public class NotFoundMemberException extends RuntimeException{
     private ErrorCode errorCode;
 

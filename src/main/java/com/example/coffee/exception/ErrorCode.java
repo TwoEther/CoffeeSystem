@@ -9,6 +9,7 @@ public enum ErrorCode {
     ALREADY_REGISTERED_USER_ID(HttpStatus.BAD_REQUEST, "U-004", "이미 존재하는 유저 아이디입니다.");
 
 
+
     private final HttpStatus httpStatus;
     private final String errorCode;
     private final String message;

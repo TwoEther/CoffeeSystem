@@ -11,6 +11,15 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
     @ExceptionHandler(DuplicateMemberException.class)
     protected ResponseEntity<ErrorResponseEntity> handleDuplicateMemberException(DuplicateMemberException e) {
-        return ErrorResponseEntity.toResponseEntity(e.getErrorCode());
+        HttpStatus httpStatus = e.getErrorCode().getHttpStatus();
+        String message = e.getMessage();
+        return ResponseEntity.status(httpStatus).body(new ErrorResponseEntity(httpStatus, message));
+    }
+
+    @ExceptionHandler(NotFoundMemberException.class)
+    protected ResponseEntity<ErrorResponseEntity> handleNotFoundMemberException(NotFoundMemberException e) {
+        HttpStatus httpStatus = e.getErrorCode().getHttpStatus();
+        String message = e.getMessage();
+        return ResponseEntity.status(httpStatus).body(new ErrorResponseEntity(httpStatus, message));
     }
 }

@@ -1,23 +1,25 @@
 package com.example.coffee.exception;
 
 import lombok.Builder;
+import lombok.Getter;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+@Getter
 @Builder
-public class ErrorResponseEntity {
-    private int status;
-    private String name;
-    private String code;
+public class ErrorResponseEntity<T> {
+    private HttpStatus httpStatus;
     private String message;
+    private T data;
 
-    public static ResponseEntity<ErrorResponseEntity> toResponseEntity(ErrorCode e){
-        return ResponseEntity
-                .status(e.getHttpStatus())
-                .body(ErrorResponseEntity.builder()
-                        .status(e.getHttpStatus().value())
-                        .name(e.name())
-                        .code(e.getErrorCode())
-                        .message(e.getMessage())
-                        .build());
+    public ErrorResponseEntity(HttpStatus httpStatus, String message) {
+        this.httpStatus = httpStatus;
+        this.message = message;
+    }
+
+    public ErrorResponseEntity(HttpStatus httpStatus, String message, T data) {
+        this.httpStatus = httpStatus;
+        this.message = message;
+        this.data = data;
     }
 }

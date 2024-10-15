@@ -7,7 +7,7 @@ public class DuplicateMemberException extends RuntimeException{
     private ErrorCode errorCode;
 
     public DuplicateMemberException(String message, ErrorCode errorCode) {
-        super(errorCode.getErrorCode());
+        super(message);
         this.errorCode = errorCode;
     }
 }
